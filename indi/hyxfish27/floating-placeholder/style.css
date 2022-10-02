@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: rgba(240, 128, 128, 0.7);
+    color: aliceblue;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: relative;
+    width: 500px;
+    background-color: salmon;
+    padding: 32px;
+    border-radius: 10px;
+}
+
+.container h2 {
+    margin-bottom: 40px;
+}
+
+.input-field {
+    position: relative;
+    height: 32px;
+    width: 100%;
+}
+
+/* position: absolute 的用意是讓後面排列的元素對齊父元素的起點
+其中 relative 的元素仍然會照常排列
+*/
+.input-field input[type="text"] {
+    /* 將 position 設成 absolute，這樣 label 會跟 input 對齊同一個起點 */
+    position: absolute;
+
+    /* 清空 input 的預設樣式 */
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+
+    /* 設定新的 style */
+    width: 100%;
+    height: 100%;
+    color: aliceblue;
+    font-size: 16px;
+}
+
+.input-field label {
+    /* 設成 absolute 是為了讓後面的 span 也對齊父元素 */
+    position: absolute;
+
+    /* 不知道爲什麼要 t0 l0 -> 歸零位置*/
+    top: 0;
+    left: 0;
+
+    /* label style */
+    color: rgba(240, 248, 255, 0.6);
+
+    /* 目前在 label 上點擊不到 input，因此需要將 label 的滑鼠事件取消 */
+    pointer-events: none;
+
+    transition: 0.5s;
+}
+
+/* 
+    當 input 在 focus/valid 狀態下，希望 label 做的事情
+    focus: 游標在輸入框上
+    valid: 輸入框上有內容，同時點擊其他地方使游標離開
+ */
+.input-field input[type="text"]:focus + label,
+.input-field input[type="text"]:valid + label {
+    font-size: 14px;
+    color: aliceblue;
+    background-color: #8ad7da;
+    padding: 4px 8px;
+    transform: translateY(-24px);
+}
+
+/* 用 span 做 border-bottom 的效果 */
+.input-field span {
+    /* 對齊 input-field 的 右下角 */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: aliceblue;
+}
+
+/* 回到初始狀態: 以右邊為圓心做 x 軸的縮放 */
+.input-field span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #8ad7da;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease-in-out;
+}
+
+.input-field input[type="text"]:focus ~ span::before,
+.input-field input[type="text"]:valid ~ span::before {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+.btn {
+    margin-top: 24px;
+    border: 0;
+    box-shadow: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: lightcoral;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: salmon;
+    border: 2px solid aliceblue;
+    padding: 6px 8px;
+    color: aliceblue;
+    box-shadow: none;
+}
