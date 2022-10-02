@@ -1,0 +1,8 @@
+{
+  "name": "css-tricks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "hyxfish27",
+  "license": "MIT",
+  "repository": {"directory": "git@github.com:hyxfish27/CSS-tricks.git"}
+}
